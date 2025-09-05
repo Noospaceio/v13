@@ -3,7 +3,8 @@ import { WagmiConfig, createConfig, configureChains } from 'wagmi'
 import { mainnet, polygon } from 'wagmi/chains'
 import { publicProvider } from 'wagmi/providers/public'
 import { InjectedConnector } from 'wagmi/connectors/injected'
-import { walletConnect } from 'wagmi/connectors/walletConnect'
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
+
 
 const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_ID || 'demo-project-id-change-me'
 
