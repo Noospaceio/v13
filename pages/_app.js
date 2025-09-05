@@ -1,23 +1,29 @@
+// pages/_app.js
 import '../styles/globals.css'
-import { WagmiConfig, createConfig, configureChains } from 'wagmi'
-import { mainnet, polygon } from 'wagmi/chains'
+import { WagmiConfig, configureChains, createConfig } from 'wagmi'
+import { mainnet } from 'wagmi/chains'
 import { publicProvider } from 'wagmi/providers/public'
-import { InjectedConnector } from 'wagmi/connectors/injected'
-import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 
+// --- Chains + Provider konfigurieren ---
+const { chains, publicClient } = configureChains(
+  [mainnet], // du kannst hier weitere Chains hinzufügen
+  [publicProvider()]
+)
 
-const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_ID || 'demo-project-id-change-me'
+// --- WalletConnect Connector einrichten ---
+const walletConnect = new WalletConnectConnector({
+  options: {
+    projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID, // lege diesen Wert in .env an
+    showQrModal: true,
+  },
+})
 
-const { chains, publicClient, webSocketPublicClient } = configureChains([mainnet, polygon], [publicProvider()])
-
+// --- wagmi Config erstellen ---
 const config = createConfig({
   autoConnect: true,
-  connectors: [
-    new InjectedConnector({ chains }),
-    walletConnect({ projectId, chains })
-  ],
+  connectors: [walletConnect],
   publicClient,
-  webSocketPublicClient
 })
 
 export default function App({ Component, pageProps }) {
@@ -27,3 +33,4 @@ export default function App({ Component, pageProps }) {
     </WagmiConfig>
   )
 }
+
