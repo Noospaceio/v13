@@ -9,7 +9,7 @@ export default function NoospaceMinimal() {
   // Sobald Wallet gesetzt ist → redirect nach v8
   useEffect(() => {
     if (wallet) {
-      router.push("https://v8-five-dun.vercel.app/?mode=wallet");
+      router.push("https://v14-one.vercel.app/?mode=wallet");
     }
   }, [wallet, router]);
 
