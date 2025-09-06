@@ -27,7 +27,7 @@ export default function NoospaceMinimal() {
       {/* Continue without wallet button */}
       <button
         onClick={() =>
-          router.push("v14-one.vercel.app")
+          router.push("https://v14-one.vercel.app/?mode=wallet")
         }
         className="mt-4 px-6 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg text-white font-semibold"
       >
